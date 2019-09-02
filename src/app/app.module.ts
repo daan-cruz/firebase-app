@@ -22,7 +22,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 @NgModule({
-  declarations: [  
+  declarations: [
     UsersComponent,
     AppComponent,
     LoginComponent,
@@ -42,8 +42,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
       confirmButtonClass: 'btn btn-primary',
       cancelButtonClass: 'btn'
     }),
-    BrowserAnimationsModule
-   
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
