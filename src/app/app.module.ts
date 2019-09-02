@@ -19,6 +19,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 // Alert
 // @ts-ignore
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { FormComponent } from './components/users/form/form.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     UsersComponent,
     AppComponent,
     LoginComponent,
-    AppComponent
+    AppComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
