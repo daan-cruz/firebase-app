@@ -29,3 +29,20 @@
     </div>
   </div>
 </form>
+
+
+<!--Alert-->
+<swal
+    #deleteSwal
+    title="Error"
+    text="This cannot be undone"
+    type="question"
+    [showCancelButton]="true"
+    [focusCancel]="true">
+</swal>
+
+With [swal]:
+<button [swal]="deleteSwal">Delete</button>
+
+Or DIY:
+<button (click)="deleteSwal.show()">Delete</button>

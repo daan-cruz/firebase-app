@@ -8,11 +8,15 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
-
+import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 // Login
+
 import { LoginComponent } from './components/login/login.component';
 // Rective form
 import {ReactiveFormsModule} from '@angular/forms';
+// Alert
+// @ts-ignore
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,14 @@ import {ReactiveFormsModule} from '@angular/forms';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    AngularFireAuthModule,
+    ReactiveFormsModule,
+    SweetAlert2Module.forRoot({
+      buttonsStyling: false,
+      customClass: 'modal-content',
+      confirmButtonClass: 'btn btn-primary',
+      cancelButtonClass: 'btn'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
