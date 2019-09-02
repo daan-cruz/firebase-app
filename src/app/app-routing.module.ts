@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UsersComponent } from './users/users.component';
+import {LoginComponent} from './components/login/login.component';
+
 
 const routes: Routes = [
 {
@@ -15,7 +17,10 @@ const routes: Routes = [
   RouterModule.forRoot( [
 	{ path : 'users', component : UsersComponent },
   ]),
-
+    RouterModule.forRoot([
+      { path: 'login', component: LoginComponent },
+    ]),
+ master
   ],
   exports: [RouterModule]
 })
