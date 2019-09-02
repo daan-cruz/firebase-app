@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     private route: Router
   ) {
 
+
     this.formLogin = new FormGroup(
       {
         email: new FormControl(''),
@@ -35,9 +36,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(customerData.email, customerData.password).then(r => {
       this.alertSwal.title = 'Correcto';
       this.alertSwal.type = 'success';
-      this.alertSwal.text = 'Usuario o contraseña incorrecta';
+      this.alertSwal.text = 'Bienvenido';
       this.alertSwal.show();
-      this.route.navigate(['welcome']);
     }).catch(error => {
       console.log(error);
       console.log(this.alertSwal);
