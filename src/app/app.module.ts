@@ -9,7 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UsersComponent } from './users/users.component';
+import { UsersComponent } from './components/users/users.component';
 import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 // Login
 
