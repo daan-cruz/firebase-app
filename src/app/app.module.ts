@@ -9,7 +9,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UsersComponent } from './users/users.component';
+import { UsersComponent } from './components/users/users.component';
 import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 // Login
 
@@ -19,6 +19,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 // Alert
 // @ts-ignore
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { FormComponent } from './components/users/form/form.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     UsersComponent,
     AppComponent,
     LoginComponent,
-    AppComponent
+    AppComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

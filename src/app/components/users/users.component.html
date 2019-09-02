@@ -1,0 +1,19 @@
+<div style="width: 100vw;">
+  <div class="row m-0">
+    <div class="col-md-6  offset-md-3" *ngFor="let user of users">
+      <div class="card">
+        <h3 class="card-header bg-light ">{{user.data.apellido}}</h3>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <button class="btn btn-block btn-primary   btn1">Editar</button>
+            </div>
+            <div class="col-md-12 mt-3">
+              <button class="btn btn-block btn-danger btn2">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

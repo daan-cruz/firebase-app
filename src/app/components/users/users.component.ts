@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FirestoreService} from '../services/firestore/firestore.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-
+import {FirestoreService} from '../../services/firestore/firestore.service';
 
 @Component({
   selector: 'app-users',
@@ -50,7 +49,7 @@ export class UsersComponent implements OnInit {
 
   public newUser(form, documentId = this.documentId) {
     console.log('Status: ${this.currentStatus}');
-    if (this.currentStatus == 1) {
+    if (this.currentStatus === 1) {
       const data = {
         nombre: form.nombre,
         apellido: form.apellido,
