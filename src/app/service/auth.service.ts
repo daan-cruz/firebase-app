@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {error} from 'util';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,9 @@ export class AuthService {
         this.afsAuth.auth.signInWithEmailAndPassword(email, password)
           .then(userData => {
               resolve(userData);
-              alert('Bienvenido');
             },
             err => {
               reject(err);
-              alert('Usuario o contraseña incorrecto');
             });
       });
   }
@@ -29,4 +28,8 @@ export class AuthService {
     return this.afsAuth.auth.signOut();
   }
 
+
+  getUserAuth() {
+    return this.afsAuth.authState.pipe(map(auth => auth));
+  }
 }

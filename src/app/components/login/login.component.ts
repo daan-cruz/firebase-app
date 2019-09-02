@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Validators, FormControl} from '@angular/forms';
 import {AuthService} from '../../service/auth.service';
 import {Route, Router} from '@angular/router';
+import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +12,12 @@ import {Route, Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   formLogin;
+  // @ts-ignore
+  @ViewChild('alertSwal') private alertSwal: SwalComponent;
 
   constructor(
-  private authService: AuthService,
-  private route: Router
+    private authService: AuthService,
+    private route: Router
   ) {
 
     this.formLogin = new FormGroup(
@@ -26,13 +29,22 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Hola');
   }
 
   onSubmit(customerData) {
-    console.log(customerData.email);
     this.authService.login(customerData.email, customerData.password).then(r => {
-    this.route.navigate(['welcome']);
-    }).catch(error => console.log(error));
+      this.alertSwal.title = 'Correcto';
+      this.alertSwal.type = 'success';
+      this.alertSwal.text = 'Usuario o contraseña incorrecta';
+      this.alertSwal.show();
+      this.route.navigate(['welcome']);
+    }).catch(error => {
+      console.log(error);
+      console.log(this.alertSwal);
+      this.alertSwal.title = 'Error';
+      this.alertSwal.type = 'error';
+      this.alertSwal.text = 'Usuario o contraseña incorrecta';
+      this.alertSwal.show();
+    });
   }
 }
