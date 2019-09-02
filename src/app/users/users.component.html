@@ -1,6 +1,25 @@
 <div class="grd">
   <div class="grd-row">
     <div class="grd-row-col-2">
+      <form (ngSubmit)="newUser(newUserForm.value)" [formGroup]="newUserForm">
+        <input type="hidden" formControlName="id">
+
+        <label for="nombre">Nombre</label>
+        <input type="text" formControlName="nombre" >
+
+        <label for="apellido">Apellido</label>
+        <input type="text" formControlName="apellido">
+
+        <label for="correo">Correo</label>
+        <input type="text" formControlName="correo">
+
+        <label for="edad">Edad</label>
+        <input type="text" formControlName="edad">
+
+
+
+        <input type="submit" class="btn--blue btn--add" [disabled]="!newUserForm.valid" value="Agregar">
+      </form>
     </div>
 
     <div class="grd-row-col-4">
@@ -18,3 +37,5 @@
     </div>
   </div>
 </div>
+
+

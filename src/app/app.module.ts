@@ -15,7 +15,7 @@ import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 
 import { LoginComponent } from './components/login/login.component';
 // Rective form
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 // Alert
 // @ts-ignore
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
@@ -35,6 +35,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireAuthModule,
+    ReactiveFormsModule,
+    FormsModule,
     ReactiveFormsModule,
     SweetAlert2Module.forRoot({
       buttonsStyling: false,
