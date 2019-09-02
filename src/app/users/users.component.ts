@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from '../services/firestore/firestore.service';
+import {Component, OnInit} from '@angular/core';
+import {FirestoreService} from '../services/firestore/firestore.service';
 
 
 @Component({
@@ -9,14 +9,14 @@ import { FirestoreService } from '../services/firestore/firestore.service';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
- 
- public users = [];
-  
-   constructor(
-    private firestoreService: FirestoreService
-  ) { }
+  public users = [];
 
- ngOnInit() {
+  constructor(
+    private firestoreService: FirestoreService
+  ) {
+  }
+
+  ngOnInit() {
     this.firestoreService.getUsers().subscribe((usersSnapshot) => {
       this.users = [];
       usersSnapshot.forEach((userData: any) => {
@@ -27,8 +27,8 @@ export class UsersComponent implements OnInit {
           data: userData.payload.doc.data()
         });
         console.log(usersSnapshot);
-              console.log(this.users);
-      })
+        console.log(this.users);
+      });
     });
   }
 }
