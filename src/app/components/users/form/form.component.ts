@@ -34,7 +34,8 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.firestoreService.getUsers().subscribe((usersSnapshot) => {
+    this.firestoreService.getUsers()
+      .subscribe((usersSnapshot) => {
       this.users = [];
       usersSnapshot.forEach((userData: any) => {
         this.users.push({
