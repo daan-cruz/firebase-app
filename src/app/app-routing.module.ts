@@ -20,7 +20,6 @@ const routes: Routes = [
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
     ]),
- master
   ],
   exports: [RouterModule]
 })
