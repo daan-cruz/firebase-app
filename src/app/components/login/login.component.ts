@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Validators, FormControl} from '@angular/forms';
-import {AuthService} from '../../service/auth.service';
+import {AuthService} from '../../services/auth.service';
 import {Route, Router} from '@angular/router';
 import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
 
