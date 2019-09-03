@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\components\\login",
+    "\\src\\app\\services\\firestore",
+    "\\src\\app\\users"
+  ],
+  "SelectedNode": "\\src\\app\\services",
+  "PreviewInSolutionExplorer": false
+}

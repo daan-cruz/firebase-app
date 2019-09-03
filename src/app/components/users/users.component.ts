@@ -101,4 +101,8 @@ export class UsersComponent implements OnInit {
       });
     }
   }
+
+  delete(documentId: string) {
+    this.firestoreService.deleteUser(documentId);
+  }
 }
