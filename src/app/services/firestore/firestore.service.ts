@@ -28,9 +28,7 @@ export class FirestoreService {
     return this.firestore.collection('user').doc(documentId).set(data);
   }
 
-  public deleteUser(documentId: string) {
-     if (confirm('¿Está seguro que desea eliminar')) {
-       this.firestore.doc('user' + documentId).delete();
-     }
+  public deleteUser(user) {
+    this.firestore.collection('user').doc(user.id).delete();
   }
 }

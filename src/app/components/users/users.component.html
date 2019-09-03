@@ -1,19 +1,23 @@
+<swal
+    #deleteSwal
+    title="¿Estas seguro que desea eliminar?"
+    text="los datos no se recuperaran"
+    type="warning"
+    [showCancelButton]="true"
+    [focusCancel]="true">
+</swal>
+
 <div style="width: 100vw;">
   <div class="row m-0">
     <div class="col-md-8 mb-3 text-right offset-md-2">
       <button class="btn btn-primary btn2" (click)="openModal(content)" data-toggle="modal" data-target="#modalUser">
         Agregar
       </button>
-      <swal #deleteSwal  title="Delete Holas?"
-            text="This cannot be undone"
-            type="question"
-            [showCancelButton]="true"
-            [focusCancel]="true" >
-      </swal>
     </div>
-    <div class="col-md-6  offset-md-3" *ngFor="let user of users">
+
+    <div class="col-md-6  offset-md-3" *ngFor="let item of users">
       <div class="card mt-4">
-        <h3 class="card-header bg-light ">{{user.data.apellido}}</h3>
+        <h3 class="card-header bg-light ">{{item.data.apellido}}</h3>
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
@@ -21,7 +25,9 @@
             </div>
             <div class="col-md-12 mt-3">
               <button class="btn btn-block btn-danger btn2"
-                      [swal]="deleteSwal" (confirm)="delete(user)">Eliminar</button>
+                      [swal]="deleteSwal"
+                      (confirm)="delete(item)"
+              >Eliminar</button>
             </div>
           </div>
         </div>

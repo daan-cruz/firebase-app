@@ -5,6 +5,7 @@ import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
 import * as $ from 'jquery';
 import * as s from 'bootstrap';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-users',
 
@@ -25,8 +26,6 @@ export class UsersComponent implements OnInit {
 
   // @ts-ignore
   @ViewChild('exampleModal') private modal;
-  // @ts-ignore
-  @ViewChild('deleteSwal') private deleteSwal: SwalComponent;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -42,7 +41,6 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.firestoreService.getUsers().subscribe((usersSnapshot) => {
       this.users = [];
       usersSnapshot.forEach((userData: any) => {
@@ -103,7 +101,7 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  delete(documentId: string) {
-    this.firestoreService.deleteUser(documentId);
+  delete(user) {
+    this.firestoreService.deleteUser(user);
   }
 }
