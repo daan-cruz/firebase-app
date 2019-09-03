@@ -19,7 +19,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 // Alert
 // @ts-ignore
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { FormComponent } from './components/users/form/form.component';
 
 // bootstrap
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -30,7 +29,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     LoginComponent,
     AppComponent,
-    FormComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import * as $ from 'jquery';
 import * as s from 'bootstrap';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
+
 @Component({
   selector: 'app-users',
 
@@ -14,16 +15,10 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class UsersComponent implements OnInit {
   public users = [];
+  public user;
   public documentId = null;
   public currentStatus = 1;
-  public newUserForm = new FormGroup({
-    nombre: new FormControl('', Validators.required),
-    apellido: new FormControl('', Validators.required),
-    correo: new FormControl('', Validators.required),
-    edad: new FormControl('', Validators.required),
-    id: new FormControl('')
-  });
-
+  public newUserForm;
   // @ts-ignore
   @ViewChild('exampleModal') private modal;
 
@@ -31,6 +26,13 @@ export class UsersComponent implements OnInit {
     private firestoreService: FirestoreService,
     private modalService: NgbModal
   ) {
+    this.newUserForm = new FormGroup({
+      nombre: new FormControl('', Validators.required),
+      apellido: new FormControl('', Validators.required),
+      correo: new FormControl('', Validators.required),
+      edad: new FormControl('', Validators.required),
+      id: new FormControl('')
+    });
     this.newUserForm.setValue({
       id: '',
       nombre: '',
@@ -52,15 +54,44 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  public openModal(content) {
-
+  public openModal(content, newUserForm, user) {
+    this.user = user;
+    this.currentStatus = 1;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-    }, (reason) => {
+      },
+      (reason) => {
+      });
 
-    });
+
+    if (user != null) {
+      this.newUserForm.setValue({
+        nombre: user.data.nombre,
+        apellido: user.data.apellido,
+        correo: user.data.correo,
+        edad: user.data.edad,
+        id: user.id
+      });
+      this.currentStatus = 2;
+    }
   }
 
+  delete(user) {
+    this.firestoreService.deleteUser(user);
+  }
+
+  update(user, form) {
+    const data = {
+      nombre: form.nombre,
+      apellido: form.apellido,
+      correo: form.correo,
+      edad: form.edad
+    };
+    this.firestoreService.updateUser(user, data);
+  }
+
+
   public newUser(form, documentId = this.documentId) {
+    console.log('Status: ${this.currentStatus}');
     if (this.currentStatus === 1) {
       const data = {
         nombre: form.nombre,
@@ -69,6 +100,7 @@ export class UsersComponent implements OnInit {
         edad: form.edad
       };
       this.firestoreService.createUser(data).then(() => {
+        console.log('Documento creado exitósamente!');
         this.newUserForm.setValue({
           nombre: '',
           apellido: '',
@@ -86,7 +118,7 @@ export class UsersComponent implements OnInit {
         correo: form.correo,
         edad: form.edad
       };
-      this.firestoreService.updateUser(documentId, data).then(() => {
+      this.firestoreService.updateUser(this.user.id, data).then(() => {
         this.currentStatus = 1;
         this.newUserForm.setValue({
           nombre: '',
@@ -95,13 +127,10 @@ export class UsersComponent implements OnInit {
           edad: '',
           id: ''
         });
+        console.log('Documento editado exitósamente');
       }, (error) => {
         console.log(error);
       });
     }
-  }
-
-  delete(user) {
-    this.firestoreService.deleteUser(user);
   }
 }

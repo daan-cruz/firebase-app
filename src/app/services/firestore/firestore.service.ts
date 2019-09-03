@@ -24,11 +24,11 @@ export class FirestoreService {
     return this.firestore.collection('user').snapshotChanges();
   }
   // Actualiza un gato
-  public updateUser(documentId: string, data: any) {
-    return this.firestore.collection('user').doc(documentId).set(data);
+  public updateUser(user, data: any) {
+    return this.firestore.collection('user').doc(user.id).set(data);
   }
 
   public deleteUser(user) {
-    this.firestore.collection('user').doc(user.id).delete();
+   return  this.firestore.collection('user').doc(user.id).delete();
   }
 }
