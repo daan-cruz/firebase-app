@@ -1,7 +1,12 @@
 <div style="width: 100vw;">
   <div class="row m-0">
+    <div class="col-md-8 mb-3 text-right offset-md-2">
+      <button class="btn btn-primary btn2" (click)="openModal(content)" data-toggle="modal" data-target="#modalUser">
+        Agregar
+      </button>
+    </div>
     <div class="col-md-6  offset-md-3" *ngFor="let user of users">
-      <div class="card">
+      <div class="card mt-4">
         <h3 class="card-header bg-light ">{{user.data.apellido}}</h3>
         <div class="card-body">
           <div class="row">
@@ -17,4 +22,20 @@
     </div>
   </div>
 </div>
-<app-form></app-form>
+
+<ng-template #content>
+  <div class="row m-0">
+    <div class="col-md-12 text-center mt-3">
+      <h5>Nuevo usuario</h5>
+    </div>
+    <div class="col-md-12 py-3">
+      <app-form></app-form>
+    </div>
+  </div>
+</ng-template>
+<style>
+
+  .modal-content {
+    height: 60vh;
+  }
+</style>

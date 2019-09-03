@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FirestoreService} from '../../../services/firestore/firestore.service';
 
@@ -34,18 +34,7 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.firestoreService.getUsers()
-      .subscribe((usersSnapshot) => {
-      this.users = [];
-      usersSnapshot.forEach((userData: any) => {
-        this.users.push({
-          id: userData.payload.doc.id,
-          data: userData.payload.doc.data()
-        });
-        console.log(usersSnapshot);
-        console.log(this.users);
-      });
-    });
+    console.log('asdsadas');
   }
 
 

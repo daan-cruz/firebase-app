@@ -1,6 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FirestoreService} from '../../services/firestore/firestore.service';
+import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
+import * as $ from 'jquery';
+import * as s from 'bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-users',
@@ -20,8 +24,12 @@ export class UsersComponent implements OnInit {
     id: new FormControl('')
   });
 
+  // @ts-ignore
+  @ViewChild('exampleModal') private modal;
+
   constructor(
-    private firestoreService: FirestoreService
+    private firestoreService: FirestoreService,
+    private modalService: NgbModal
   ) {
     this.newUserForm.setValue({
       id: '',
@@ -41,14 +49,19 @@ export class UsersComponent implements OnInit {
           id: userData.payload.doc.id,
           data: userData.payload.doc.data()
         });
-        console.log(usersSnapshot);
-        console.log(this.users);
       });
     });
   }
 
+  public openModal(content) {
+
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    }, (reason) => {
+
+    });
+  }
+
   public newUser(form, documentId = this.documentId) {
-    console.log('Status: ${this.currentStatus}');
     if (this.currentStatus === 1) {
       const data = {
         nombre: form.nombre,
@@ -57,7 +70,6 @@ export class UsersComponent implements OnInit {
         edad: form.edad
       };
       this.firestoreService.createUser(data).then(() => {
-        console.log('Documento creado exitósamente!');
         this.newUserForm.setValue({
           nombre: '',
           apellido: '',
@@ -84,7 +96,6 @@ export class UsersComponent implements OnInit {
           edad: '',
           id: ''
         });
-        console.log('Documento editado exitósamente');
       }, (error) => {
         console.log(error);
       });

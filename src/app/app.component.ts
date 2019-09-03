@@ -15,10 +15,9 @@ export class AppComponent {
               private route: Router) {
     authService.getUserAuth().subscribe((auth) => {
       this.authUser = auth;
-      console.log(this.authUser);
     });
-    console.log(this.authUser);
   }
+
   logout() {
     this.authService.logout();
   }

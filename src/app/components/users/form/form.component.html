@@ -1,25 +1,34 @@
-<div class="grd">
-  <div class="grd-row">
-    <div class="grd-row-col-2">
-      <form (ngSubmit)="newUser(newUserForm.value)" [formGroup]="newUserForm">
-        <input type="hidden" formControlName="id">
-
+<form (ngSubmit)="newUser(newUserForm.value)" [formGroup]="newUserForm">
+  <div class="row">
+    <input type="hidden" formControlName="id">
+    <div class="col-md-12">
+      <div class="form-group">
         <label for="nombre">Nombre</label>
-        <input type="text" formControlName="nombre" id="nombre">
-
+        <input type="text" formControlName="nombre" class="form-control" id="nombre">
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
         <label for="apellido">Apellido</label>
-        <input type="text" formControlName="apellido">
-
+        <input class="form-control" type="text" formControlName="apellido" id="apellido">
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
         <label for="correo">Correo</label>
-        <input type="text" formControlName="correo">
-
+        <input class="form-control" type="text" formControlName="correo" id="correo">
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form-group">
         <label for="edad">Edad</label>
-        <input type="text" formControlName="edad">
-
-
-
-        <input type="submit" class="btn--blue btn--add" [disabled]="!newUserForm.valid" value="Agregar">
-      </form>
+        <input class="form-control" type="text" formControlName="edad" id="edad">
+      </div>
+    </div>
+    <div class="col-md-12 text-center">
+      <button type="submit" class="btn btn-primary" [disabled]="!newUserForm.valid">
+        Agregar
+      </button>
     </div>
   </div>
-</div>
+</form>

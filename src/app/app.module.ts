@@ -21,6 +21,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FormComponent } from './components/users/form/form.component';
 
+// bootstrap
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -44,9 +46,10 @@ import { FormComponent } from './components/users/form/form.component';
       buttonsStyling: false,
       customClass: 'modal-content',
       confirmButtonClass: 'btn btn-primary',
-      cancelButtonClass: 'btn'
+      cancelButtonClass: 'btn',
     }),
     BrowserAnimationsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
