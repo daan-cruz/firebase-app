@@ -5,7 +5,6 @@ import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
 import * as $ from 'jquery';
 import * as s from 'bootstrap';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
 @Component({
   selector: 'app-users',
 
@@ -26,6 +25,8 @@ export class UsersComponent implements OnInit {
 
   // @ts-ignore
   @ViewChild('exampleModal') private modal;
+  // @ts-ignore
+  @ViewChild('deleteSwal') private deleteSwal: SwalComponent;
 
   constructor(
     private firestoreService: FirestoreService,
