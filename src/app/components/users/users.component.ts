@@ -62,8 +62,7 @@ export class UsersComponent implements OnInit {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
       .result.then((result) => {
         this.resetForm();
-      },
-      (reason) => {
+      }, (reason) => {
         this.resetForm();
       });
     if (user != null) {
@@ -94,7 +93,6 @@ export class UsersComponent implements OnInit {
     }, (error) => {
     });
   }
-
   public newUser(data) {
     this.firestoreService.createUser(data).then(() => {
       this.resetForm();
