@@ -61,8 +61,10 @@ export class UsersComponent implements OnInit {
     this.currentStatus = 1;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
       .result.then((result) => {
+        this.resetForm();
       },
       (reason) => {
+        this.resetForm();
       });
     if (user != null) {
       this.newUserForm.setValue({
