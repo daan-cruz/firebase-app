@@ -87,6 +87,8 @@ export class UsersComponent implements OnInit {
       this.alertSwal.type = 'success';
       this.alertSwal.text = 'Usuario modificado';
       this.alertSwal.show();
+      this.modalService.dismissAll();
+      this.user = null;
     }, (error) => {
     });
   }
@@ -98,6 +100,7 @@ export class UsersComponent implements OnInit {
       this.alertSwal.type = 'success';
       this.alertSwal.text = 'Usuario agregado';
       this.alertSwal.show();
+      this.modalService.dismissAll();
     }, (error) => {
     });
   }

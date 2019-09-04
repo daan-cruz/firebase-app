@@ -26,24 +26,26 @@
 
     <div class="col-md-6  offset-md-3" *ngFor="let user of users">
       <div class="card mt-4">
-        <h3 class="card-header bg-light ">Nombre: {{user.data.nombre + " " + user.data.apellido}}</h3>
+        <h3 class="card-header bg-light ">{{user.data.nombre + " " + user.data.apellido}}</h3>
         <div class="card-body">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <div class="row">
                 <div class="col-md-12">
+                  <b>Correo: </b>{{user.data.correo}}
                 </div>
                 <div class="col-md-12">
+                  <b>Edad: </b>{{user.data.edad}} años
                 </div>
               </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-3   ">
               <button class="btn btn-block btn-primary   btn1"
                       (click)="openModal(content, newUserForm,user)"
               >Editar
               </button>
             </div>
-            <div class="col-md-12 mt-3">
+            <div class="col-md-3 ">
               <button class="btn btn-block btn-danger btn2"
                       [swal]="deleteSwal"
                       (confirm)="delete(user)"
@@ -87,7 +89,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <label for="edad">Edad</label>
-              <input class="form-control" type="text" formControlName="edad" id="edad">
+              <input class="form-control" type="numeric" formControlName="edad" id="edad">
             </div>
           </div>
           <div class="col-md-12 text-center">
