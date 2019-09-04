@@ -21,6 +21,8 @@ export class UsersComponent implements OnInit {
   public newUserForm;
   // @ts-ignore
   @ViewChild('exampleModal') private modal;
+  // @ts-ignore
+  @ViewChild('alertSwal') private alertSwal: SwalComponent;
 
   constructor(
     private firestoreService: FirestoreService,
@@ -54,15 +56,14 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  public openModal(content, newUserForm, user) {
+  public openModal(content, newUserForm, user = null) {
     this.user = user;
     this.currentStatus = 1;
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
+      .result.then((result) => {
       },
       (reason) => {
       });
-
-
     if (user != null) {
       this.newUserForm.setValue({
         nombre: user.data.nombre,
@@ -75,62 +76,55 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  delete(user) {
+  public delete(user) {
     this.firestoreService.deleteUser(user);
   }
 
-  update(user, form) {
+  public update(user, data) {
+    this.firestoreService.updateUser(this.user, data).then(() => {
+      this.resetForm();
+      this.alertSwal.title = 'Correcto';
+      this.alertSwal.type = 'success';
+      this.alertSwal.text = 'Usuario modificado';
+      this.alertSwal.show();
+    }, (error) => {
+    });
+  }
+
+  public newUser(data) {
+    this.firestoreService.createUser(data).then(() => {
+      this.resetForm();
+      this.alertSwal.title = 'Correcto';
+      this.alertSwal.type = 'success';
+      this.alertSwal.text = 'Usuario agregado';
+      this.alertSwal.show();
+    }, (error) => {
+    });
+  }
+
+
+  public upsert(form) {
     const data = {
       nombre: form.nombre,
       apellido: form.apellido,
       correo: form.correo,
       edad: form.edad
     };
-    this.firestoreService.updateUser(user, data);
+
+    if (this.currentStatus === 1) {
+      this.newUser(data);
+    } else {
+      this.update(this.user, data);
+    }
   }
 
-
-  public newUser(form, documentId = this.documentId) {
-    console.log('Status: ${this.currentStatus}');
-    if (this.currentStatus === 1) {
-      const data = {
-        nombre: form.nombre,
-        apellido: form.apellido,
-        correo: form.correo,
-        edad: form.edad
-      };
-      this.firestoreService.createUser(data).then(() => {
-        console.log('Documento creado exitósamente!');
-        this.newUserForm.setValue({
-          nombre: '',
-          apellido: '',
-          correo: '',
-          edad: '',
-          id: ''
-        });
-      }, (error) => {
-        console.error(error);
-      });
-    } else {
-      const data = {
-        nombre: form.nombre,
-        apellido: form.apellido,
-        correo: form.correo,
-        edad: form.edad
-      };
-      this.firestoreService.updateUser(this.user.id, data).then(() => {
-        this.currentStatus = 1;
-        this.newUserForm.setValue({
-          nombre: '',
-          apellido: '',
-          correo: '',
-          edad: '',
-          id: ''
-        });
-        console.log('Documento editado exitósamente');
-      }, (error) => {
-        console.log(error);
-      });
-    }
+  public resetForm() {
+    this.newUserForm.setValue({
+      nombre: '',
+      apellido: '',
+      correo: '',
+      edad: '',
+      id: ''
+    });
   }
 }

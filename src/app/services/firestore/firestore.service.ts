@@ -19,11 +19,11 @@ export class FirestoreService {
   public getUser(documentId: string) {
     return this.firestore.collection('user').doc(documentId).snapshotChanges();
   }
-  // Obtiene todos los gatos
+
   public getUsers() {
     return this.firestore.collection('user').snapshotChanges();
   }
-  // Actualiza un gato
+  // update user
   public updateUser(user, data: any) {
     return this.firestore.collection('user').doc(user.id).set(data);
   }
