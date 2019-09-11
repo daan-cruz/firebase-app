@@ -1,0 +1,226 @@
+<swal
+    #deleteSwal
+    title="¿Estas seguro que desea eliminar?"
+    text="los datos no se recuperaran"
+    type="warning"
+    [showCancelButton]="true"
+    [focusCancel]="true">
+</swal>
+
+<swal
+    #alertSwal
+    title=""
+    text=""
+    type="success">
+</swal>
+
+
+<div style="width: 100vw;">
+  <div class="row m-0">
+    <div class="col-md-8 mb-3 text-right offset-md-2">
+      <button class="btn btn-primary btn2" (click)="openModal(content, newMunicipalitiesForm)" data-toggle="modal"
+              data-target="#modalUser">
+        Agregar
+      </button>
+    </div>
+    <div class="col-md-6  offset-md-3" *ngFor="let user of users">
+      <div class="card mt-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-12">
+                  <h3>{{user.data.IGECEM + " " + user.data.NOMBRE}}</h3>
+                </div>
+                <div class="col-md-12">
+                  <b>Altitud: </b>{{user.data.ALTITUD}}
+                  <b>Cabecera: </b>{{user.data.CABECERA}}
+                  <b>Significado: </b>{{user.data.SIGNIFICADO}}
+                  <b>Superficie: </b>{{user.data.SUPERFICIE}}
+                </div>
+                <div class="col-md-12">
+                  <b>Edad: </b>{{user.data.edad}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3   ">
+              <button class="btn btn-block btn-primary   btn1"
+                      (click)="openModal(content, newMunicipalitiesForm,user)"
+              >Editar
+              </button>
+            </div>
+            <div class="col-md-3 ">
+              <button class="btn btn-block btn-danger btn2"
+                      [swal]="deleteSwal"
+                      (confirm)="delete(user)"
+              >Eliminar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content>
+  <div class="row m-0">
+    <div class="col-md-12 text-center mt-3">
+      <h5>Nuevo municipio</h5>
+    </div>
+    <div class="col-md-12 py-3">
+      <form (ngSubmit)="upsert(newMunicipalitiesForm.value)" [formGroup]="newMunicipalitiesForm">
+        <div class="row">
+          <input type="hidden" formControlName="id">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="NOMBRE">Nombre</label>
+              <input type="text" formControlName="NOMBRE" class="form-control" id="NOMBRE">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="IGECEM">IGECEM</label>
+              <input class="form-control" type="text" formControlName="IGECEM" id="IGECEM">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="ALTITUD">ALTITUD</label>
+              <input class="form-control" type="text" formControlName="ALTITUD" id="ALTITUD">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="CABECERA">CABECERA</label>
+              <input class="form-control" type="text" formControlName="CABECERA" id="CABECERA">
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="CLIMA">CLIMA</label>
+              <select class="form-control" formControlName="CLIMA" id="CLIMA">
+                <option value="Cálido">Cálido</option>
+                <option value="Semiárido">Semiárido</option>
+                <option value="Seco">Seco</option>
+                <option value="Templado">Templado</option>
+                <option value="Semifrio">Semifrio</option>
+                <option value="Frio">Frio</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="SIGNIFICADO">SIGNIFICADO</label>
+              <input class="form-control" type="text" formControlName="SIGNIFICADO" id="SIGNIFICADO">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-sm-6 col-md-4 ">
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" formControlName="inundacionCheck"
+                           id="inundacionCheck">
+                    <label class="form-check-label" for="inundacionCheck">
+                      Inundación
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4 ">
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" formControlName="deslaveCheck" id="deslaveCheck">
+                    <label class="form-check-label" for="deslaveCheck">
+                      deslave
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-4 ">
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" formControlName="sismoCheck" id="sismoCheck">
+                    <label class="form-check-label" for="sismoCheck">
+                      Zona sísmica
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-4 ">
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" formControlName="incendioCheck" id="incendioCheck">
+                    <label class="form-check-label" for="incendioCheck">
+                      Incendio forestal
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-4 ">
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" formControlName="vocanesCheck" id="vocanesCheck">
+                    <label class="form-check-label" for="vocanesCheck">
+                      Zona volcánica
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-4 ">
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" formControlName="derrumbesCheck"
+                           id="derrumbesCheck">
+                    <label class="form-check-label" for="derrumbesCheck">
+                      Derrumbes
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <agm-map
+              [latitude]="lat"
+              [longitude]="lng"
+              [zoom]="zoom"
+              [disableDefaultUI]="false"
+              [zoomControl]="false"
+              (mapClick)="mapClicked($event)">
+              <agm-marker
+                *ngFor="let m of markers; let i = index"
+                (markerClick)="clickedMarker(m.label, i)"
+                [latitude]="m.lat"
+                [longitude]="m.lng"
+                [label]="m.label"
+                [markerDraggable]="m.draggable"
+                (dragEnd)="markerDragEnd(m, $event)">
+                <agm-info-window>
+                  <strong>Nuevo lugar</strong>
+                </agm-info-window>
+              </agm-marker>
+<!--              <agm-circle [latitude]="lat + 0.3" [longitude]="lng"-->
+<!--                          [radius]="5000"-->
+<!--                          [fillColor]="'red'"-->
+<!--                          [circleDraggable]="true"-->
+<!--                          [editable]="true">-->
+<!--              </agm-circle>-->
+            </agm-map>
+            <div class="col-md-12 text-center mt-5">
+              <button type="submit" class="btn btn-primary" [disabled]="!newMunicipalitiesForm.valid">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>

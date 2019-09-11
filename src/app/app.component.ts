@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from './services/auth.service';
 import {Router} from '@angular/router';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,13 +12,20 @@ export class AppComponent {
 
   constructor(private authService: AuthService,
               private route: Router) {
-    authService.getUserAuth().subscribe((auth) => {
-      this.authUser = auth;
-    });
+    if (this.authUser == null) {
+      this.route.navigate(['login']);
+      authService.getUserAuth().subscribe((auth) => {
+        this.authUser = auth;
+        if (auth != null) {
+          this.route.navigate(['municipalities']);
+        }
+      });
+    }
   }
 
+
   logout() {
-    this.authService.logout();
+    this.authService.logout().then(r => this.route.navigate(['login']));
   }
 
 }

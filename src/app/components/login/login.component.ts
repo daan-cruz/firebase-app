@@ -11,7 +11,6 @@ import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
   styleUrls: ['./login.component.css']
 })
 
-
 export class LoginComponent implements OnInit {
   formLogin;
   // @ts-ignore
@@ -21,19 +20,14 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private route: Router
   ) {
-
-
     this.formLogin = new FormGroup(
       {
         email: new FormControl(''),
         password: new FormControl('')
       });
-
   }
-
   ngOnInit() {
   }
-
   onSubmit(customerData) {
     this.authService.login(customerData.email, customerData.password).then(r => {
       this.alertSwal.title = 'Correcto';

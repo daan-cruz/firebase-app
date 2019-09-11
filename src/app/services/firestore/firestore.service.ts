@@ -11,24 +11,20 @@ export class FirestoreService {
    constructor(
     private firestore: AngularFirestore
   ) {}
-  // Crea un nuevo gato
-  public createUser(data: {nombre: string, apellido: string, correo: string, edad: string}) {
-    return this.firestore.collection('user').add(data);
-  }
-  // Obtiene un gato
-  public getUser(documentId: string) {
-    return this.firestore.collection('user').doc(documentId).snapshotChanges();
+
+  public createMunicipalities(data) {
+    return this.firestore.collection('municipalities').add(data);
   }
 
-  public getUsers() {
-    return this.firestore.collection('user').snapshotChanges();
-  }
-  // update user
-  public updateUser(user, data: any) {
-    return this.firestore.collection('user').doc(user.id).set(data);
+  public getMunicipalities() {
+    return this.firestore.collection('municipalities').snapshotChanges();
   }
 
-  public deleteUser(user) {
-   return  this.firestore.collection('user').doc(user.id).delete();
+  public updateMunicipalities(municipalities, data: any) {
+    return this.firestore.collection('municipalities').doc(municipalities.id).set(data);
+  }
+
+  public deleteMunicipalities(municipalities) {
+   return  this.firestore.collection('municipalities').doc(municipalities.id).delete();
   }
 }

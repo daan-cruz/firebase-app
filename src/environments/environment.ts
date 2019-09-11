@@ -4,14 +4,23 @@
 
 export const environment = {
   production: false,
-  firebase : {
-    apiKey: "AIzaSyD9w-ObdO37qpvayStqt3-3n9DQbLL91O4",
-    authDomain: "angular-firebase-9b608.firebaseapp.com",
-    databaseURL: "https://angular-firebase-9b608.firebaseio.com",
-    projectId: "angular-firebase-9b608",
-    storageBucket: "",
-    messagingSenderId: "346926474677",
-    appId: "1:346926474677:web:fe3f0823d9bb4954"
+  firebase: {
+    apiKey: 'AIzaSyBp9kqVfPA-9OLZEVxIQpYXIAvd_vwEQh8',
+    authDomain: 'example-e3b15.firebaseapp.com',
+    databaseURL: 'https://example-e3b15.firebaseio.com',
+    projectId: 'example-e3b15',
+    storageBucket: 'example-e3b15.appspot.com',
+    messagingSenderId: '162064246948',
+    appId: '1:162064246948:web:422ebd9020958e7f'
+  },
+  sweetAlert: {
+    buttonsStyling: false,
+    customClass: 'modal-content',
+    confirmButtonClass: 'btn btn-primary',
+    cancelButtonClass: 'btn',
+  },
+  mapsKey: {
+    apiKey: 'AIzaSyAuYXawrzjug2cr4cJpHKqO26Bv9c8n4W8'
   }
 };
 

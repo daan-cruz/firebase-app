@@ -1,25 +1,23 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {UsersComponent} from './components/users/users.component';
 import {LoginComponent} from './components/login/login.component';
+import {MunicipalitiesComponent} from './components/municipalities/municipalities.component';
 
 
 const routes: Routes = [
   {
-    path: 'users',
-    component: UsersComponent
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'municipalities',
+    component: MunicipalitiesComponent
   }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
-    RouterModule.forRoot([
-      {path: 'users', component: UsersComponent},
-    ]),
-    RouterModule.forRoot([
-      {path: 'login', component: LoginComponent},
-    ]),
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })
