@@ -13,8 +13,8 @@ import {MouseEvent} from '@agm/core';
   styleUrls: ['./municipalities.component.css']
 })
 export class MunicipalitiesComponent implements OnInit {
-  public users = [];
-  public user;
+  public municipalitiess = [];
+  public municipalities;
   public documentId = null;
   public currentStatus = 1;
   public newMunicipalitiesForm;
@@ -24,7 +24,7 @@ export class MunicipalitiesComponent implements OnInit {
   @ViewChild('alertSwal') private alertSwal: SwalComponent;
 
 
-  public zoom = 5.48;
+  public zoom = 4.48;
   // initial center position for the map
   public lat = 23.0259554;
   public lng = -103.0461714;
@@ -75,24 +75,24 @@ export class MunicipalitiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.firestoreService.getMunicipalities().subscribe((usersSnapshot) => {
-    //   this.users = [];
-    //   usersSnapshot.forEach((userData: any) => {
-    //     this.users.push({
-    //       id: userData.payload.doc.id,
-    //       data: userData.payload.doc.data()
-    //     });
-    //   });
-    // });
+    this.firestoreService.getMunicipalities().subscribe((municipalitiessSnapshot) => {
+      this.municipalitiess = [];
+      municipalitiessSnapshot.forEach((municipalitiesData: any) => {
+        this.municipalitiess.push({
+          id: municipalitiesData.payload.doc.id,
+          data: municipalitiesData.payload.doc.data()
+        });
+      });
+    });
   }
 
 // ***************************CRUD***************************************** //
-  public delete(user) {
-    this.firestoreService.deleteMunicipalities(user);
+  public delete(municipalities) {
+    this.firestoreService.deleteMunicipalities(municipalities);
   }
 
-  public update(user, data) {
-    this.firestoreService.updateMunicipalities(this.user, data).then(() => {
+  public update(municipalities, data) {
+    this.firestoreService.updateMunicipalities(this.municipalities, data).then(() => {
       this.successFull('Municipio modificado');
     }, (error) => {
     });
@@ -125,7 +125,7 @@ export class MunicipalitiesComponent implements OnInit {
     if (this.currentStatus === 1) {
       this.new(data);
     } else {
-      this.update(this.user, data);
+      this.update(this.municipalities, data);
     }
   }
 
@@ -155,6 +155,7 @@ export class MunicipalitiesComponent implements OnInit {
       vocanesCheck: '',
       derrumbesCheck: '',
     });
+    this.markers = [];
   }
 
 // *************************MAPS **************************
@@ -162,36 +163,60 @@ export class MunicipalitiesComponent implements OnInit {
     console.log(`clicked the marker: ${label || index}`);
   }
 
-  public mapClicked($event: MouseEvent) {
-    this.latMunicpipaliti = $event.coords.lat;
-    this.lngMunicpipaliti = $event.coords.lng;
-    console.log(this.latMunicpipaliti);
-    console.log(this.lngMunicpipaliti);
+  public addMarker(lat, lng) {
+    this.latMunicpipaliti = lat;
+    this.lngMunicpipaliti = lng;
     this.markers = [];
     this.markers.push({
-      lat: $event.coords.lat,
-      lng: $event.coords.lng,
+      lat: this.latMunicpipaliti,
+      lng: this.lngMunicpipaliti,
       draggable: true
     });
+  }
+
+  public mapClicked($event: MouseEvent) {
+    this.addMarker($event.coords.lat, $event.coords.lng);
+    this.latMunicpipaliti = $event.coords.lat;
+    this.lngMunicpipaliti = $event.coords.lng;
   }
 
   public markerDragEnd(m: marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);
   }
 
-  public openModal(content, newMunicipalitiesForm, user = null) {
-    this.user = user;
+  public openModal(content, newMunicipalitiesForm, municipalities = null) {
+    this.municipalities = municipalities;
     this.currentStatus = 1;
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
+      size: 'lg',
     })
       .result.then((result) => {
       this.resetForm();
     }, (reason) => {
       this.resetForm();
     });
-    if (user != null) {
-      this.resetForm();
+    if (municipalities != null) {
+      console.log(municipalities);
+      this.newMunicipalitiesForm.setValue({
+        id: municipalities.id,
+        NOMBRE: municipalities.data.NOMBRE,
+        IGECEM: municipalities.data.IGECEM,
+        ALTITUD: municipalities.data.ALTITUD,
+        CABECERA: municipalities.data.CABECERA,
+        CLIMA: municipalities.data.CLIMA,
+        SIGNIFICADO: municipalities.data.SIGNIFICADO,
+        inundacionCheck: municipalities.data.inundacionCheck,
+        deslaveCheck: municipalities.data.deslaveCheck,
+        sismoCheck: municipalities.data.sismoCheck,
+        incendioCheck: municipalities.data.incendioCheck,
+        vocanesCheck: municipalities.data.vocanesCheck,
+        derrumbesCheck: municipalities.data.derrumbesCheck,
+      });
+
+      this.addMarker(municipalities.data.LATITUD, municipalities.data.LONGITUD);
+      this.lat = municipalities.data.LATITUD;
+      this.lng = municipalities.data.LONGITUD;
       this.currentStatus = 2;
     }
   }

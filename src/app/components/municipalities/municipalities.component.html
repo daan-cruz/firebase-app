@@ -17,13 +17,84 @@
 
 <div style="width: 100vw;">
   <div class="row m-0">
+
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-sm-6 col-md-4 ">
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"
+                     id="inundacionCheckFilter">
+              <label class="form-check-label" for="inundacionCheckFilter">
+                Inundación
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 ">
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"  id="deslaveCheckFilter">
+              <label class="form-check-label" for="deslaveCheckFilter">
+                Deslave
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4 ">
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"  id="sismoCheckFilter">
+              <label class="form-check-label" for="sismoCheckFilter">
+                Zona sísmica
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4 ">
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="incendioCheckFilter">
+              <label class="form-check-label" for="incendioCheckFilter">
+                Incendio forestal
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4 ">
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="vocanesCheckFilter">
+              <label class="form-check-label" for="vocanesCheckFilter">
+                Zona volcánica
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4 ">
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"
+                     id="derrumbesCheckFilter">
+              <label class="form-check-label" for="derrumbesCheckFilter">
+                Derrumbes
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="col-md-8 mb-3 text-right offset-md-2">
       <button class="btn btn-primary btn2" (click)="openModal(content, newMunicipalitiesForm)" data-toggle="modal"
               data-target="#modalUser">
         Agregar
       </button>
     </div>
-    <div class="col-md-6  offset-md-3" *ngFor="let user of users">
+    <div class="col-md-6  offset-md-3" *ngFor="let user of municipalitiess">
       <div class="card mt-4">
         <div class="card-body">
           <div class="row">
@@ -134,7 +205,7 @@
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" formControlName="deslaveCheck" id="deslaveCheck">
                     <label class="form-check-label" for="deslaveCheck">
-                      deslave
+                      Deslave
                     </label>
                   </div>
                 </div>

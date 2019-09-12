@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from 'angularfire2/firestore';
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -8,16 +8,19 @@ import { Observable } from 'rxjs';
 })
 export class FirestoreService {
 
-   constructor(
+  constructor(
     private firestore: AngularFirestore
-  ) {}
+  ) {
+  }
 
   public createMunicipalities(data) {
     return this.firestore.collection('municipalities').add(data);
   }
 
   public getMunicipalities() {
-    return this.firestore.collection('municipalities').snapshotChanges();
+    return this.firestore.collection('municipalities', ref =>
+     ref.where('IGECEM', '==', '150')
+    ).snapshotChanges();
   }
 
   public updateMunicipalities(municipalities, data: any) {
@@ -25,6 +28,6 @@ export class FirestoreService {
   }
 
   public deleteMunicipalities(municipalities) {
-   return  this.firestore.collection('municipalities').doc(municipalities.id).delete();
+    return this.firestore.collection('municipalities').doc(municipalities.id).delete();
   }
 }
