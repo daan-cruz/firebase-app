@@ -26,8 +26,10 @@ export class LoginComponent implements OnInit {
         password: new FormControl('')
       });
   }
+
   ngOnInit() {
   }
+
   onSubmit(customerData) {
     this.authService.login(customerData.email, customerData.password).then(r => {
       this.alertSwal.title = 'Correcto';
@@ -42,5 +44,21 @@ export class LoginComponent implements OnInit {
       this.alertSwal.text = 'Usuario o contraseña incorrecta';
       this.alertSwal.show();
     });
+  }
+
+  anony() {
+    this.authService.loginAnoni()
+      .then(r => {
+        console.log();
+        this.alertSwal.title = 'Correcto';
+        this.alertSwal.type = 'success';
+        this.alertSwal.text = 'Bienvenido';
+        this.alertSwal.show();
+      })
+      .catch(error => {
+        console.log(error.code);
+        console.log(error.message);
+
+      });
   }
 }

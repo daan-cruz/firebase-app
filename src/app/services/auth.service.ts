@@ -27,6 +27,18 @@ export class AuthService {
   logout() {
     return this.afsAuth.auth.signOut();
   }
+  loginAnoni(){
+    return new Promise(
+      (resolve, reject) => {
+        this.afsAuth.auth.signInAnonymously()
+          .then(userData => {
+              resolve(userData);
+            },
+            err => {
+              reject(err);
+            });
+      });
+  }
 
 
   getUserAuth() {
