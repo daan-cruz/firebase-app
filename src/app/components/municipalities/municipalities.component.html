@@ -17,13 +17,19 @@
 
 <div style="width: 100vw;">
   <div class="row m-0">
-
+    <div class="col-md-8 mb-3 text-right offset-md-2">
+      <button class="btn btn-primary btn2" (click)="openModal(content, newMunicipalitiesForm)" data-toggle="modal"
+              data-target="#modalUser">
+        Agregar
+      </button>
+    </div>
     <div class="col-md-12">
       <div class="row">
-        <div class="col-sm-6 col-md-4 ">
+        <div class="col-sm-6 col-md-4 text-center ">
           <div class="form-group">
             <div class="form-check">
               <input class="form-check-input" type="checkbox"
+                     (click)="inundacionFilter()"
                      id="inundacionCheckFilter">
               <label class="form-check-label" for="inundacionCheckFilter">
                 Inundación
@@ -31,10 +37,12 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-6 col-md-4 ">
+        <div class="col-sm-6 col-md-4 text-center ">
           <div class="form-group">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox"  id="deslaveCheckFilter">
+              <input class="form-check-input" type="checkbox"
+                     (click)="deslaveFilter()"
+                     id="deslaveCheckFilter">
               <label class="form-check-label" for="deslaveCheckFilter">
                 Deslave
               </label>
@@ -42,10 +50,12 @@
           </div>
         </div>
 
-        <div class="col-sm-6 col-md-4 ">
+        <div class="col-sm-6 col-md-4 text-center ">
           <div class="form-group">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox"  id="sismoCheckFilter">
+              <input class="form-check-input" type="checkbox"
+                     (click)="sismoFilter()"
+                     id="sismoCheckFilter">
               <label class="form-check-label" for="sismoCheckFilter">
                 Zona sísmica
               </label>
@@ -53,10 +63,12 @@
           </div>
         </div>
 
-        <div class="col-sm-6 col-md-4 ">
+        <div class="col-sm-6 col-md-4 text-center ">
           <div class="form-group">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="incendioCheckFilter">
+              <input class="form-check-input" type="checkbox"
+                     (click)="incendioFilter()"
+                     id="incendioCheckFilter">
               <label class="form-check-label" for="incendioCheckFilter">
                 Incendio forestal
               </label>
@@ -64,10 +76,12 @@
           </div>
         </div>
 
-        <div class="col-sm-6 col-md-4 ">
+        <div class="col-sm-6 col-md-4 text-center ">
           <div class="form-group">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="vocanesCheckFilter">
+              <input class="form-check-input" type="checkbox"
+                     (click)="vocanesFilter()"
+                     id="vocanesCheckFilter">
               <label class="form-check-label" for="vocanesCheckFilter">
                 Zona volcánica
               </label>
@@ -75,10 +89,11 @@
           </div>
         </div>
 
-        <div class="col-sm-6 col-md-4 ">
+        <div class="col-sm-6 col-md-4 text-center ">
           <div class="form-group">
             <div class="form-check">
               <input class="form-check-input" type="checkbox"
+                     (click)="derrumbeFilter()"
                      id="derrumbesCheckFilter">
               <label class="form-check-label" for="derrumbesCheckFilter">
                 Derrumbes
@@ -87,12 +102,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-8 mb-3 text-right offset-md-2">
-      <button class="btn btn-primary btn2" (click)="openModal(content, newMunicipalitiesForm)" data-toggle="modal"
-              data-target="#modalUser">
-        Agregar
-      </button>
     </div>
     <div class="col-md-6  offset-md-3" *ngFor="let user of municipalitiess">
       <div class="card mt-4">
@@ -277,12 +286,12 @@
                   <strong>Nuevo lugar</strong>
                 </agm-info-window>
               </agm-marker>
-<!--              <agm-circle [latitude]="lat + 0.3" [longitude]="lng"-->
-<!--                          [radius]="5000"-->
-<!--                          [fillColor]="'red'"-->
-<!--                          [circleDraggable]="true"-->
-<!--                          [editable]="true">-->
-<!--              </agm-circle>-->
+              <!--              <agm-circle [latitude]="lat + 0.3" [longitude]="lng"-->
+              <!--                          [radius]="5000"-->
+              <!--                          [fillColor]="'red'"-->
+              <!--                          [circleDraggable]="true"-->
+              <!--                          [editable]="true">-->
+              <!--              </agm-circle>-->
             </agm-map>
             <div class="col-md-12 text-center mt-5">
               <button type="submit" class="btn btn-primary" [disabled]="!newMunicipalitiesForm.valid">

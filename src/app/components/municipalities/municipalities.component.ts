@@ -18,11 +18,16 @@ export class MunicipalitiesComponent implements OnInit {
   public documentId = null;
   public currentStatus = 1;
   public newMunicipalitiesForm;
+  derrumbe = false;
+  deslave = false;
+  incendio = false;
+  inundacion = false;
+  sismo = false;
+  vocanes = false;
   // @ts-ignore
   @ViewChild('exampleModal') private modal;
   // @ts-ignore
   @ViewChild('alertSwal') private alertSwal: SwalComponent;
-
 
   public zoom = 4.48;
   // initial center position for the map
@@ -30,26 +35,7 @@ export class MunicipalitiesComponent implements OnInit {
   public lng = -103.0461714;
   public lngMunicpipaliti = 23.0259554;
   public latMunicpipaliti = -103.0461714;
-  public markers: marker[] = [
-    // {
-    //   lat: 51.673858,
-    //   lng: 7.815982,
-    //   label: 'A',
-    //   draggable: true
-    // },
-    // {
-    //   lat: 51.373858,
-    //   lng: 7.215982,
-    //   label: 'B',
-    //   draggable: false
-    // },
-    // {
-    //   lat: 51.723858,
-    //   lng: 7.895982,
-    //   label: 'C',
-    //   draggable: true
-    // }
-  ];
+  public markers: marker[] = [];
 
 
   constructor(
@@ -75,15 +61,17 @@ export class MunicipalitiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.firestoreService.getMunicipalities().subscribe((municipalitiessSnapshot) => {
-      this.municipalitiess = [];
-      municipalitiessSnapshot.forEach((municipalitiesData: any) => {
-        this.municipalitiess.push({
-          id: municipalitiesData.payload.doc.id,
-          data: municipalitiesData.payload.doc.data()
+    this.firestoreService
+      .getMunicipalities(this.derrumbe, this.deslave, this.incendio, this.inundacion, this.sismo, this.vocanes)
+      .subscribe((municipalitiessSnapshot) => {
+        this.municipalitiess = [];
+        municipalitiessSnapshot.forEach((municipalitiesData: any) => {
+          this.municipalitiess.push({
+            id: municipalitiesData.payload.doc.id,
+            data: municipalitiesData.payload.doc.data()
+          });
         });
       });
-    });
   }
 
 // ***************************CRUD***************************************** //
@@ -99,10 +87,21 @@ export class MunicipalitiesComponent implements OnInit {
   }
 
   public new(data) {
-    this.firestoreService.createMunicipalities(data).then(() => {
-      this.successFull('Municipio agregado');
-    }, (error) => {
-    });
+    let fleat = true;
+    for (let x = 0; x < this.municipalitiess.length; x++) {
+      if (this.municipalitiess[x].data.IGECEM == data.IGECEM) {
+        fleat = false;
+        break;
+      }
+    }
+    if (fleat) {
+      this.firestoreService.createMunicipalities(data).then(() => {
+        this.successFull('Municipio agregado');
+      }, (error) => {
+      });
+    } else {
+      this.error('IGECEM ya registrado');
+    }
   }
 
   public upsert(form) {
@@ -138,7 +137,12 @@ export class MunicipalitiesComponent implements OnInit {
     this.alertSwal.show();
     this.modalService.dismissAll();
   }
-
+  public error(text) {
+    this.alertSwal.title = 'Error';
+    this.alertSwal.type = 'error';
+    this.alertSwal.text = text;
+    this.alertSwal.show();
+  }
   public resetForm() {
     this.newMunicipalitiesForm.setValue({
       id: '',
@@ -221,7 +225,51 @@ export class MunicipalitiesComponent implements OnInit {
     }
   }
 
+  public derrumbeFilter() {
+    this.derrumbe = !(this.derrumbe);
+    this.filter();
+  }
 
+  public deslaveFilter() {
+    this.deslave = !(this.deslave);
+    this.filter();
+  }
+
+  public incendioFilter() {
+    this.incendio = !(this.incendio);
+    this.filter();
+  }
+
+  public inundacionFilter() {
+    this.inundacion = !(this.inundacion);
+    this.filter();
+  }
+
+  public sismoFilter() {
+    this.sismo = !(this.sismo);
+    this.filter();
+  }
+
+  public vocanesFilter() {
+    this.vocanes = !(this.vocanes);
+    this.filter();
+  }
+
+  public filter() {
+    console.log('Filtros');
+    this.municipalitiess = [];
+    this.firestoreService
+      .getMunicipalities(this.derrumbe, this.deslave, this.incendio, this.inundacion, this.sismo, this.vocanes)
+      .subscribe((municipalitiessSnapshot) => {
+        this.municipalitiess = [];
+        municipalitiessSnapshot.forEach((municipalitiesData: any) => {
+          this.municipalitiess.push({
+            id: municipalitiesData.payload.doc.id,
+            data: municipalitiesData.payload.doc.data()
+          });
+        });
+      });
+  }
 }
 
 // just an interface for type safety.

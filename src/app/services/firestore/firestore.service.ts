@@ -17,9 +17,29 @@ export class FirestoreService {
     return this.firestore.collection('municipalities').add(data);
   }
 
-  public getMunicipalities() {
-    return this.firestore.collection('municipalities', ref =>
-     ref.where('IGECEM', '==', '150')
+  public getMunicipalities(derrumbe, deslave, incendio, inundacion, sismo, vocanes) {
+    return this.firestore.collection('municipalities', ref => {
+        let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+        if (derrumbe) {
+          query = query.where('derrumbesCheck', '==', true);
+        }
+        if (deslave) {
+          query = query.where('deslaveCheck', '==', true);
+        }
+        if (incendio) {
+          query = query.where('incendioCheck', '==', true);
+        }
+        if (inundacion) {
+          query = query.where('inundacionCheck', '==', true);
+        }
+        if (sismo) {
+          query = query.where('deslaveCheck', '==', true);
+        }
+        if (vocanes) {
+          query = query.where('volcanesCheck', '==', true);
+        }
+        return query.orderBy('IGECEM', 'desc');
+      }
     ).snapshotChanges();
   }
 
